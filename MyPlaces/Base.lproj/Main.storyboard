@@ -18,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="85" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Hdk-ls-J6K">
-                                <rect key="frame" x="0.0" y="119" width="414" height="743"/>
+                                <rect key="frame" x="0.0" y="119" width="414" height="777"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" id="Uib-Rg-1nU" customClass="CustomTableViewCell" customModule="MyPlaces" customModuleProvider="target">
@@ -105,7 +105,7 @@
                             <constraint firstItem="Hdk-ls-J6K" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="CLK-Tw-ZIF"/>
                             <constraint firstItem="9dQ-6e-MWd" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="ETv-Ox-52F"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="9dQ-6e-MWd" secondAttribute="trailing" id="F3Y-pA-prG"/>
-                            <constraint firstItem="Hdk-ls-J6K" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="koq-eg-ftk"/>
+                            <constraint firstItem="Hdk-ls-J6K" firstAttribute="bottom" secondItem="8bC-Xf-vdC" secondAttribute="bottom" id="koq-eg-ftk"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="My Places" largeTitleDisplayMode="never" id="I13-jg-Kml">

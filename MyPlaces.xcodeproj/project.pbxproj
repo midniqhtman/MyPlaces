@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0823162228B7A14B00B4B40B /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0823162128B7A14B00B4B40B /* MapViewController.swift */; };
 		0879A11428A8775C00E58986 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0879A11328A8775C00E58986 /* StorageManager.swift */; };
 		08B2C91F28B2E73D00F29109 /* RatingControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B2C91E28B2E73D00F29109 /* RatingControl.swift */; };
 		08C7438128A4615100A5F650 /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C7438028A4615100A5F650 /* CustomTableViewCell.swift */; };
@@ -22,6 +23,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0823162128B7A14B00B4B40B /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		0879A11328A8775C00E58986 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 		08B2C91E28B2E73D00F29109 /* RatingControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingControl.swift; sourceTree = "<group>"; };
 		08C7438028A4615100A5F650 /* CustomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
@@ -85,6 +87,7 @@
 				08FC66A628A32FF9001EF24B /* Assets.xcassets */,
 				08FC66A828A32FF9001EF24B /* LaunchScreen.storyboard */,
 				08FC66AB28A32FF9001EF24B /* Info.plist */,
+				0823162128B7A14B00B4B40B /* MapViewController.swift */,
 			);
 			path = MyPlaces;
 			sourceTree = "<group>";
@@ -225,6 +228,7 @@
 				08FC66A228A32FF7001EF24B /* ViewController.swift in Sources */,
 				08FC669E28A32FF7001EF24B /* AppDelegate.swift in Sources */,
 				0879A11428A8775C00E58986 /* StorageManager.swift in Sources */,
+				0823162228B7A14B00B4B40B /* MapViewController.swift in Sources */,
 				08B2C91F28B2E73D00F29109 /* RatingControl.swift in Sources */,
 				08C7438328A46E2100A5F650 /* PlaceModel.swift in Sources */,
 				08C7438128A4615100A5F650 /* CustomTableViewCell.swift in Sources */,

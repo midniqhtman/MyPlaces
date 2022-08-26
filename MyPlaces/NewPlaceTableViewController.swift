@@ -6,22 +6,29 @@
 //
 
 import UIKit
+import Cosmos
 
 class NewPlaceTableViewController: UITableViewController, UINavigationControllerDelegate {
     
     var imageIsChanged = false
-    var currentPlace: Place?
+    var currentPlace: Place!
+    var currentRating = 0.0
     
+    @IBOutlet weak var cosmosView: CosmosView!
     @IBOutlet weak var placeImage: UIImageView!
     @IBOutlet weak var saveButton: UIBarButtonItem!
     @IBOutlet weak var placeLocation: UITextField!
     @IBOutlet weak var placeType: UITextField!
     @IBOutlet weak var placeName: UITextField!
+    @IBOutlet weak var ratingControl: RatingControl!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+        cosmosView.didTouchCosmos = { rating in
+            self.currentRating = rating
+            print("\(rating)")
+        }
         
         tableView.tableFooterView = UIView(frame: CGRect(x: 0,
                                                          y: 0,
@@ -61,6 +68,20 @@ class NewPlaceTableViewController: UITableViewController, UINavigationController
             view.endEditing(true)
         }
     }
+
+    //MARK: Navigation
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+       
+        if segue.identifier != "showMap" { return }
+        
+        let mapVC = segue.destination as! MapViewController
+        mapVC.place.name = placeName.text ?? " "
+        mapVC.place.location = placeLocation.text
+        mapVC.place.type = placeType.text
+        mapVC.place.imageData = placeImage.image?.pngData()
+
+        }
     
     func savePlace() {
         
@@ -74,7 +95,11 @@ class NewPlaceTableViewController: UITableViewController, UINavigationController
         
         let imageData = image?.pngData()
         
-        let newPlace = Place(name: placeName.text!, location: placeLocation.text, type: placeType.text, imageData: imageData)
+        let newPlace = Place(name: placeName.text!,
+                             location: placeLocation.text,
+                             type: placeType.text,
+                             imageData: imageData,
+                             rating: currentRating)
         
         if currentPlace != nil {
             try! realm.write {
@@ -82,6 +107,7 @@ class NewPlaceTableViewController: UITableViewController, UINavigationController
                 currentPlace?.location = newPlace.location
                 currentPlace?.type = newPlace.type
                 currentPlace?.imageData = newPlace.imageData
+                currentPlace?.rating = newPlace.rating
             }
         } else {
                 StorageManager.saveObject(newPlace)
@@ -106,6 +132,7 @@ class NewPlaceTableViewController: UITableViewController, UINavigationController
             placeName.text = currentPlace?.name
             placeLocation.text = currentPlace?.location
             placeType.text = currentPlace?.type
+            cosmosView.rating = currentPlace.rating
         }
     }
     

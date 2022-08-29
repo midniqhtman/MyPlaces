@@ -11,23 +11,48 @@ import CoreLocation
 
 class MapViewController: UIViewController {
 
+    @IBOutlet weak var adressLabel: UILabel!
     @IBOutlet weak var mapView: MKMapView!
     
+    @IBOutlet weak var pin: UIImageView!
+    @IBOutlet weak var locationButton: UIButton!
+    @IBAction func centerViewInUserLocation() {
+        
+      showUserLocation()
+        
+    }
+    @IBOutlet weak var doneButton: UIButton!
+    
+    @IBAction func doneButtonPressed() {
+        
+    }
     var place = Place()
     let annotationIdentifier = " "
     let locationManager = CLLocationManager()
+    let regionInMetres = 10_000.00
+    var incomeSegueIdentifier = ""
     
     override func viewDidLoad() {
         
+        locationButton.layer.cornerRadius = 20
         mapView.delegate = self
         super.viewDidLoad()
-        setupPlaceMark()
+        setupMapView()
         checkLocationServices()
 
     }
     
     @IBAction func closeVc() {
         dismiss(animated: true)
+    }
+    
+    private func setupMapView() {
+        if incomeSegueIdentifier == "showMap" {
+            setupPlaceMark()
+            pin.isHidden = true
+            adressLabel.isHidden = true
+            doneButton.isHidden = true
+        }
     }
     
     private func setupPlaceMark() {
@@ -65,7 +90,9 @@ class MapViewController: UIViewController {
             setupLocationManager()
             checkLocationAuthorization()
         } else {
-            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                self.showAlert(title: "Location Services are disabled", message: "To enable, go for: Settings -> Privacy -> Location Settings")
+            }
         }
     }
     
@@ -79,19 +106,47 @@ class MapViewController: UIViewController {
         case .notDetermined:
             locationManager.requestWhenInUseAuthorization()
         case .restricted:
-            //show alert controller
             break
         case .denied:
-            //show alert controller
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                self.showAlert(title: "Location isn't available", message: "To give permission, go to: Settings -> Myplaces -> Location")
+            }
             break
         case .authorizedAlways:
             break
         case .authorizedWhenInUse:
             mapView.showsUserLocation = true
+            if incomeSegueIdentifier == "getAddress" { showUserLocation() }
             break
         @unknown default:
             print("new case is available")
         }
+    }
+
+private func showUserLocation() {
+    if let location = locationManager.location?.coordinate {
+        let region = MKCoordinateRegion(center: location,
+                                        latitudinalMeters: regionInMetres,
+                                        longitudinalMeters: regionInMetres)
+        mapView.setRegion(region, animated: true)
+    }
+}
+    
+    private func getCenterLocation(for mapView: MKMapView) -> CLLocation {
+        
+        let lattitude = mapView.centerCoordinate.latitude
+        let longitude = mapView.centerCoordinate.latitude
+        
+        return CLLocation(latitude: lattitude, longitude: longitude)
+    }
+    
+    private func showAlert(title: String, message: String) {
+        
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "Ok", style: .default)
+        
+        alert.addAction(okAction)
+        present(alert, animated: true )
     }
 }
 
@@ -117,6 +172,37 @@ extension MapViewController: MKMapViewDelegate {
         annotationView?.rightCalloutAccessoryView = imageView
     }
         return annotationView
+    }
+    
+    func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
+        
+        let center = getCenterLocation(for: mapView)
+        let geocoder = CLGeocoder()
+        
+        geocoder.reverseGeocodeLocation(center) { (placemarks, error) in
+            
+            if let error = error {
+                print(error)
+                return
+            }
+            
+            guard let placemarks = placemarks else { return }
+            
+            let placemark = placemarks.first
+            let streetName = placemark?.thoroughfare
+            let buildNumber = placemark?.subThoroughfare
+            
+            DispatchQueue.main.async {
+                
+                if streetName != nil, buildNumber != nil  {
+                    self.adressLabel.text = "\(streetName!), \(buildNumber!)"
+                } else if streetName != nil {
+                    self.adressLabel.text = "\(streetName!)"
+                } else {
+                    self.adressLabel.text = " "
+                }
+            }
+        }
     }
 }
 

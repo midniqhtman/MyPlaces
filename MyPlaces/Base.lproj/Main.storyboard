@@ -455,6 +455,21 @@
                                     <action selector="doneButtonPressed" destination="hxu-uu-vDY" eventType="touchDragInside" id="x3E-d7-7OE"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lUA-rV-co3">
+                                <rect key="frame" x="165.5" y="702" width="83" height="74"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="74" id="LYC-G6-0ba"/>
+                                    <constraint firstAttribute="width" constant="83" id="l85-9G-nGj"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain">
+                                    <imageReference key="image" image="chevron.forward.circle.fill" catalog="system" symbolScale="default"/>
+                                    <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" configurationType="pointSize" pointSize="50"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="goButtonPressed" destination="hxu-uu-vDY" eventType="touchUpInside" id="Dba-yP-riX"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="fPr-Yy-XHW"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -475,11 +490,15 @@
                             <constraint firstItem="iZ4-px-Ecw" firstAttribute="centerX" secondItem="ozr-X5-C63" secondAttribute="centerX" id="mA4-1U-RvD"/>
                             <constraint firstItem="1fE-OJ-GL1" firstAttribute="centerX" secondItem="ozr-X5-C63" secondAttribute="centerX" id="nJF-aj-fnP"/>
                             <constraint firstItem="fPr-Yy-XHW" firstAttribute="bottom" secondItem="zka-5a-cBU" secondAttribute="bottom" constant="100" id="quF-br-4Pu"/>
+                            <constraint firstItem="lUA-rV-co3" firstAttribute="centerX" secondItem="ozr-X5-C63" secondAttribute="centerX" id="rFn-al-rlB"/>
+                            <constraint firstItem="fPr-Yy-XHW" firstAttribute="bottom" secondItem="lUA-rV-co3" secondAttribute="bottom" constant="66" id="riT-P5-Isz"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="NPZ-e7-VAV"/>
                     <connections>
                         <outlet property="adressLabel" destination="1fE-OJ-GL1" id="X44-Z7-4c6"/>
                         <outlet property="doneButton" destination="iZ4-px-Ecw" id="TUi-RD-aaK"/>
+                        <outlet property="goButton" destination="lUA-rV-co3" id="LOk-KZ-OZP"/>
                         <outlet property="locationButton" destination="zka-5a-cBU" id="NJz-B9-fUy"/>
                         <outlet property="mapView" destination="LgP-xr-jPy" id="ePv-Eh-cSd"/>
                         <outlet property="pin" destination="V7k-ny-ZjR" id="I16-bD-Oqf"/>
@@ -538,7 +557,7 @@
         </designable>
     </designables>
     <inferredMetricsTieBreakers>
-        <segue reference="2rD-dR-pcn"/>
+        <segue reference="Fgu-hE-VMT"/>
         <segue reference="vHO-8b-egJ"/>
     </inferredMetricsTieBreakers>
     <resources>
@@ -546,6 +565,7 @@
         <image name="Photo" width="195" height="196"/>
         <image name="Pin" width="42" height="42"/>
         <image name="Placeholder" width="22" height="22"/>
+        <image name="chevron.forward.circle.fill" catalog="system" width="128" height="121"/>
         <image name="clear" catalog="system" width="128" height="114"/>
         <image name="location.circle" catalog="system" width="128" height="121"/>
         <image name="map" width="50" height="50"/>
